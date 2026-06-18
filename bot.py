@@ -68,7 +68,7 @@ def credit_user_balance(invoice_id: str, user_id: int, amount_rub: float):
 async def cmd_start(message: types.Message, command: CommandObject):
     args = command.args
     main_kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="🌐 Перейти на Vestsmm.shop", url=WEBSITE_URL)]
+        [InlineKeyboardButton(text="🌐 Перейти на сайт", url=WEBSITE_URL)]
     ])
 
     if args:
@@ -140,7 +140,7 @@ async def cmd_start(message: types.Message, command: CommandObject):
             return
 
     welcome_text = (
-        f"👋 Приветствуем в **Vest SMM**!\n\n"
+        f"👋 Приветствуем в Vest SMM\n\n"
         f"Мы рады видеть вас в нашем боте поддержки и платежей.\n"
         f"Управление заказами, просмотр каталога и авторизация проходят на сайте.\n\n"
         f"🔗 Наш сайт: {WEBSITE_URL}"
@@ -216,7 +216,7 @@ async def process_successful_payment(message: types.Message):
     user_id, amount_rub, _ = invoice
     if credit_user_balance(invoice_id, user_id, amount_rub):
         back_kb = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text="📱 Вернуться на сайт", url=WEBSITE_URL)]])
-        await message.answer(f"🎉 **Баланс успешно пополнен на {amount_rub} ₽!**\nСредства зачислены на ваш аккаунт.", reply_markup=back_kb)
+        await message.answer(f"🎉 Баланс успешно пополнен на {amount_rub} ₽!\nСредства зачислены на ваш аккаунт.", reply_markup=back_kb)
     else:
         await message.answer("⚠ Транзакция прошла, но баланс уже был пополнен ранее.")
 
